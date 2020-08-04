@@ -152,3 +152,4 @@ Pipfile
 Pipfile.lock
 
 .env
+admin/
