@@ -151,3 +151,4 @@ dmypy.json
 Pipfile
 Pipfile.lock
 
+.env
