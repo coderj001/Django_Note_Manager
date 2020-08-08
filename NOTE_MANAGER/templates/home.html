@@ -1,9 +1,52 @@
-{% extends "base.html" %}
-
-{% block title %}Note {% endblock title %}
-
-{% block context %}
-   <div class="container">
-      <h1>Hello World!</h1> 
-   </div> 
+{% extends "base.html" %} {% block title %} Note {% endblock title %} {% block context %}
+<div class="container-fluid">
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-4">
+            <h3>Note: </h3>
+            <h4><a href="{% url "core:addnote" %}">ADD NOTE</a></h4>
+            {% if notes_list %}
+            <div class="list-group">
+                {% for note in notes_list %}
+					<a class="list-group-item list-group-item-action" href="{% url 'core:note' note.id %}">
+					{{ note.title }}
+					</a>
+                {% endfor %}
+				</div>
+            </ul>
+            {% endif %}
+        </div>
+        <div class="col-8">
+            <div class="p-3" style="background-color: #bbbdbb;">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="Title">Title</label>
+                        {% if note %}
+                        <input type="text" name="title" class="form-control" id="" placeholder="" value="{{note.title}}"/>
+                        {% else %}
+                        <input type="text" name="title" class="form-control" id="" placeholder="" />
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        {% if note %}
+                        <textarea class="form-control" name="desciption" id="" rows="7">{{note.description}} </textarea>
+                        {% else %}
+                        <textarea class="form-control" name="description" id="" rows="7"></textarea>
+                        {% endif %}
+                    </div>
+					{% if note %}
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="#" class="btn btn-danger">Delete</a>
+					{% else %}
+                    <button type="submit" class="btn btn-dark">Submit</button>
+					{% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock context %}
