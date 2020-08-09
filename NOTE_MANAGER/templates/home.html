@@ -1,6 +1,13 @@
 {% extends "base.html" %} {% block title %} Note {% endblock title %} {% block context %}
 <div class="container-fluid">
     <br />
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} roal="alert">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <br />
     <br />
     <div class="row">
@@ -11,7 +18,7 @@
             <div class="list-group">
                 {% for note in notes_list %}
 					<a class="list-group-item list-group-item-action" href="{% url 'core:note' note.id %}">
-					{{ note.title }}
+                        {{ forloop.counter }}.&nbsp;{{ note.title }}
 					</a>
                 {% endfor %}
 				</div>
@@ -33,14 +40,14 @@
                     <div class="form-group">
                         <label for="Description">Description</label>
                         {% if note %}
-                        <textarea class="form-control" name="desciption" id="" rows="7">{{note.description}} </textarea>
+                        <textarea class="form-control" name="description" id="" rows="7">{{note.description}} </textarea>
                         {% else %}
                         <textarea class="form-control" name="description" id="" rows="7"></textarea>
                         {% endif %}
                     </div>
 					{% if note %}
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'core:delete' note.id %}" class="btn btn-danger">Delete</a>
 					{% else %}
                     <button type="submit" class="btn btn-dark">Submit</button>
 					{% endif %}

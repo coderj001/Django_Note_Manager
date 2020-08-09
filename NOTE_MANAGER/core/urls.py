@@ -3,6 +3,7 @@ from core.views import (
     demo,
     addnote,
     notelist,
+    notedelete
 )
 
 app_name='core'
@@ -10,6 +11,6 @@ app_name='core'
 urlpatterns = [
     # path('',demo,name="demo"),
     path('',addnote,name="addnote"),
-	#TODO: Add function
     path('note/<id>',notelist,name="note"),
+    path('notedelete/<id>',notedelete,name="delete"),
 ]

@@ -8,7 +8,7 @@ class Note(models.Model):
     created=models.DateTimeField(auto_now_add=timezone.now(),editable=False)
     updated=models.DateTimeField(auto_now=timezone.now())
     class Meta:
-        ordering=("updated",)
+        ordering=("-updated",)
 
     def __str__(self):
         return "{} - {}".format(self.id,self.title)
